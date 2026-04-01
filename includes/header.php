@@ -49,8 +49,8 @@ $currentScript = basename($_SERVER['PHP_SELF']);
             </div>
         </nav>
         <div class="nav-actions">
+            <a class="btn btn-secondary" href="login.php">Sign In</a>
             <a class="btn btn-primary" href="finder.php">Find My Degree</a>
-            <a class="btn btn-secondary" style="margin-right: 1rem;" href="login.php">Sign In</a>
             <button class="nav-toggle" type="button" aria-controls="navDrawer" aria-expanded="false" aria-label="Open navigation menu">
                 <span></span>
                 <span></span>
@@ -72,8 +72,12 @@ $currentScript = basename($_SERVER['PHP_SELF']);
                         <a class="drawer-link" href="<?php echo $file; ?>"><?php echo $label; ?></a>
                     </li>
                 <?php endforeach; ?>
-                <li>
-                    <button id="theme-toggle" class="btn-theme" aria-label="Toggle Dark Mode">🌙</button>
+                <li class="drawer-mobile-only" style="display: none; margin-top: 1rem;">
+                    <a class="btn btn-secondary" style="width: 100%; display: block; text-align: center; margin-bottom: 0.5rem;" href="login.php">Sign In</a>
+                    <a class="btn btn-primary" style="width: 100%; display: block; text-align: center;" href="finder.php">Find My Degree</a>
+                </li>
+                <li style="margin-top: 1rem;">
+                    <button id="theme-toggle" class="btn-theme" aria-label="Toggle Dark Mode">🌙 Dark Mode</button>
                 </li>
             </ul>
         </div>
