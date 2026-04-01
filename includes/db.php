@@ -7,21 +7,15 @@ if (!$conn) {
     die("mysqli_init failed");
 }
 
-// Ensure database connection uses getenv() directly
-$db_host = getenv('DB_HOST');
-$db_user = getenv('DB_USER');
-$db_pass = getenv('DB_PASS');
-$db_name = getenv('DB_NAME');
-$db_port = getenv('DB_PORT');
+// Local XAMPP uses localhost and an empty password, so we rely on the constants loaded via config.php
+$db_host = DB_HOST;
+$db_user = DB_USER;
+$db_pass = DB_PASSWORD;
+$db_name = DB_NAME;
+$db_port = is_numeric(DB_PORT) ? (int) DB_PORT : 3306;
 
-// Secure file path moved to .env
-$cert_file = getenv('SSL_CERT_PATH') ?: 'ca.pem';
-$ssl_cert_path = dirname(__DIR__) . '/' . $cert_file;
-
-// Configure SSL
-mysqli_ssl_set($conn, NULL, NULL, $ssl_cert_path, NULL, NULL);
-
-// Establish SSL connection using getenv values
-if (!mysqli_real_connect($conn, $db_host, $db_user, $db_pass, $db_name, $db_port, NULL, MYSQLI_CLIENT_SSL)) {
+if (!mysqli_real_connect($conn, $db_host, $db_user, $db_pass, $db_name, $db_port)) {
     die("Database Connection Failed: " . mysqli_connect_error());
 }
+
+mysqli_set_charset($conn, 'utf8mb4');
